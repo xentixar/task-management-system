@@ -5,6 +5,8 @@
 #include <arpa/inet.h>
 
 #include "src/apis/root.c"
+#include "src/apis/tasks.c"
+
 
 #define PORT 8080
 #define BUFFER_SIZE 1024
@@ -32,6 +34,8 @@ void handle_request(int client_socket) {
 
     if (strncmp(buffer, "GET / ", 6) == 0) {
         handle_root(client_socket, BUFFER_SIZE);
+    } else if (strncmp(buffer, "GET /tasks ", 11) == 0) {
+        list_tasks(client_socket, BUFFER_SIZE);
     }
 }
 
